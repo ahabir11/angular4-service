@@ -1,0 +1,28 @@
+<h2>{{ title }}</h2>
+
+<nav class="navbar navbar-light bg-faded">
+    <form class="form-inline">
+        <input type="search" name="query" [(ngModel)]="query" (keyup.enter)="search()" class="form-control mr-sm-4" placeholder="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="search()">Search</button>
+    </form>
+
+    <!-- <pre>{{searchResults | json}}</pre> -->
+    <!-- <pre>{{defaultResult | json}}</pre> -->
+</nav>
+
+<table *ngIf="searchResults" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Address</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let person of searchResults; let i=index">
+            <td><a [routerLink]="['/edit', person.id]">{{person.name}}</a></td>
+            <td>{{person.phone}}</td>
+            <td>{{person.address.street}}<br/> {{person.address.city}}, {{person.address.state}} {{person.address.zip}}</td>
+        </tr>
+    </tbody>
+</table>
